@@ -1,4 +1,4 @@
-this is how to add hte connector
+this is how to add the connector
 need to install wget:
     void:
     xbps-install wget
@@ -13,7 +13,8 @@ tar -xvf mysql-connector-j-9.5.0.tar.gz
 mysql-connector-j-9.5.0
 cd ..
 mkdir -p ~/java/lib
-mv mysql-connector-j-9.5.0/mysql-connector-j-9.5.0.jar ~/java/lib/\
+mv mysql-connector-j-9.5.0/mysql-connector-j-9.5.0.jar ~/java/lib/
+export CLASSPATH=.:$HOME/java/lib/mysql-connector-j-9.5.0.jar
 
 this a simple project for manging a pharmacie:
 the ojects are :

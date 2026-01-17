@@ -1,7 +1,8 @@
 CREATE TABLE IF NOT EXISTS Medicament (
     id_m INT AUTO_INCREMENT PRIMARY KEY,
     libelle varchar(50),
-    quantite INT
+    quantite INT,
+    prix FLOAT
 );
 
 CREATE TABLE IF NOT EXISTS Fournisseur (

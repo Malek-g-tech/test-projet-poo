@@ -6,9 +6,9 @@ public class Main{
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pharmacie",
                     "talel",
                     "123");
-            System.out.println("reussi");
+            Product.addProduct("dolpran",1,123.0f,conn);
         }catch  (SQLException e){
-            System.out.println("no conn");
+            System.out.println(e.getMessage());
         }
         System.out.println("hello world");
     }
