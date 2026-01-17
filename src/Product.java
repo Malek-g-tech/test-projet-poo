@@ -16,4 +16,20 @@ public class Product {
        stmt.setFloat(3,price);
        stmt.executeUpdate();
     }
+    public static void modifierProduct(int id,String name,int quantite,float price, Connection conn) 
+    throws SQLException {
+        String sql = "UPDATE Medicament SET libelle=?,quantite=?,prix=? WHERE id_m = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1,name);
+        stmt.setInt(2,quantite);
+        stmt.setFloat(3,price);
+        stmt.setInt(4,id);
+        stmt.executeUpdate();
+    }
+    public static void supprimerProduct(int id, Connection conn) throws SQLException {
+        String sql = "DELETE FROM Medicament WHERE id_m = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1,id);
+        stmt.executeUpdate();
+    }
 }
