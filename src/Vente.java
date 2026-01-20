@@ -12,7 +12,7 @@ public class Vente{
             PreparedStatement ps = conn.prepareStatement(query);
             PreparedStatement ps2 = conn.prepareStatement(getP);){
                 ps2.setInt(1,id_m);
-                ResultSet rs = ps.executeQuery();
+                ResultSet rs = ps2.executeQuery();
                 double prix = 0;
                 if (rs.next()){
                     prix = rs.getFloat("prix") * quantite;
@@ -27,30 +27,30 @@ public class Vente{
                 e.printStackTrace();
             }
     }
-    public static ResultSet searchVente(int id_m,int id_c,Date date){
-        String query = "SELECT * FROM Vent WHERE im_m = ? AND id_c = ? and dateV = ?";
+    public static String searchVente(int id_m,int id_c,Date date){
+        String query = "SELECT * FROM Vente WHERE id_m = ? AND id_c = ? and dateV = ?";
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pharmacie","malek","password");
             PreparedStatement ps = conn.prepareStatement(query)){
             ps.setInt(1,id_m);
             ps.setInt(2,id_c);
             ps.setDate(3, (java.sql.Date) date);
             ResultSet rs = ps.executeQuery();
-            return rs;
-//            if(rs.next()){
-//                Date D = rs.getDate("dateV");
-//                int q = rs.getInt("quantite");
-//                float p = rs.getFloat("prix");
-//                String res = ""; // a termine (b5olt)
-//                return res;
-//
-//            }
+            
+           if(rs.next()){
+               Date D = rs.getDate("dateV");
+               int q = rs.getInt("quantite");
+               float p = rs.getFloat("prix");
+               String res = ""; // a termine (b5olt)
+               return res;
+
+           }
 
         }
         catch(SQLException e){
             e.printStackTrace();
 
         }
-        return null;
+        return "";
     }
     public static void modifVente(int id_m,int id_c,Date date){
         String query ="UPDATE Vente SET quantite = ? , prix = ?WHERE id_m = ? and id_c = ? and dateV = ?";
@@ -60,7 +60,7 @@ public class Vente{
             PreparedStatement ps2 = conn.prepareStatement(getP)){
             Scanner scan = new Scanner(System.in);
             ps2.setInt(1,id_m);
-            ResultSet rs = ps.executeQuery();
+            ResultSet rs = ps2.executeQuery();
             double prix = 0;
             if (rs.next()){
                 prix = rs.getFloat("prix") ;
@@ -73,10 +73,13 @@ public class Vente{
             ps.setInt(3,id_m);
             ps.setInt(4,id_c);
             ps.setDate(5, (java.sql.Date) date);
+            ps.executeUpdate();
+            scan.close();
 
         } catch (SQLException e){
             e.printStackTrace();
         }
+        
     }
 
 }
